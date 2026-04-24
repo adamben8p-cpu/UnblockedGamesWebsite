@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap');
+
+:root {
+  --primary: #6a11cb;
+  --secondary: #2575fc;
+  --bg-color: #0f0c29;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #0f0c29, #302b63, #24243e);
+  background-attachment: fixed;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(106, 17, 203, 0.15) 0%, transparent 50%);
+  animation: bgGlow 15s infinite alternate linear;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes bgGlow {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.2) translate(5%, 5%); }
+  100% { transform: scale(1) translate(-5%, -5%); }
+}
+
+header {
+  text-align: center;
+  margin: 4rem 0 3rem 0;
+  padding: 0 2rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #a4b0d0;
+  font-weight: 400;
+}
+
+.games-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.game-card {
+  position: relative;
+  display: block;
+  width: 180px;
+  height: 180px;
+  border-radius: 24px;
+  text-decoration: none;
+  /* Allow the ::before glow to expand beyond the card bounds */
+}
+
+/* Gradient glow that appears on hover */
+.game-card::before {
+  content: "";
+  position: absolute;
+  inset: -5px; /* Pull it outside a little or let scale handle it */
+  border-radius: 28px;
+  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 0;
+  filter: blur(15px);
+}
+
+.game-card:hover::before {
+  opacity: 1;
+  transform: scale(1.15); /* Expand the glow ring */
+}
+
+.game-card img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  z-index: 1; /* Keep it above the glow */
+}
+
+.game-card:hover img {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
